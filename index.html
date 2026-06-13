@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Undangan Pernikahan Awen & Rudi</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ===================== ENVELOPE INTRO ===================== -->
+  <div id="envelope-wrapper">
+    <div id="envelope">
+      <div class="env-back"></div>
+      <div class="env-body">
+        <div class="env-seal">
+          <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="30" cy="30" r="28" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M30 10 L34 22 L47 22 L37 30 L41 42 L30 34 L19 42 L23 30 L13 22 L26 22 Z" fill="#C9A84C" opacity="0.8"/>
+          </svg>
+        </div>
+        <p class="env-names">Awen & Rudi</p>
+        <p class="env-subtitle">Undangan Pernikahan</p>
+      </div>
+      <div class="env-flap-top"></div>
+    </div>
+    <button id="open-btn" onclick="openEnvelope()">
+      <span>Buka Undangan</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </div>
+
+  <!-- ===================== MAIN CONTENT ===================== -->
+  <main id="main-content" class="hidden">
+
+    <!-- MUSIC PLAYER -->
+    <div id="music-player">
+      <audio id="bg-music" loop>
+        <source src="assets/music/lagu_undangan.mp3" type="audio/mp3" />
+      </audio>
+      <button id="music-btn" onclick="toggleMusic()" title="Play/Pause Music">
+        <svg id="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <svg id="icon-pause" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <span id="music-label">♪ Putar Musik</span>
+    </div>
+
+    <!-- ===================== HERO ===================== -->
+    <section id="hero">
+      <div class="hero-overlay"></div>
+      <div class="hero-photo-wrap">
+        <img src="assets/photos/couple_landscape.jpg" alt="Awen & Rudi" id="hero-img" onerror="this.src='assets/photos/couple_landscape.jpg'" />
+      </div>
+      <div class="hero-content reveal">
+        <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+        <p class="hero-label">Kami Mengundang Anda ke Pernikahan</p>
+        <h1 class="hero-names">Awen<span class="amp">&</span>Rudi</h1>
+        <div class="hero-divider">
+          <span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg><span></span>
+        </div>
+        <p class="hero-date">Sabtu, 14 Juni 2025</p>
+      </div>
+    </section>
+
+    <!-- ===================== AYAT AL-QURAN ===================== -->
+    <section id="quran" class="section-quran">
+      <div class="quran-deco top"></div>
+      <div class="container reveal">
+        <div class="quran-ornament">
+          <svg viewBox="0 0 200 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="20" x2="80" y2="20" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+            <circle cx="100" cy="20" r="6" fill="none" stroke="#C9A84C" stroke-width="1"/>
+            <circle cx="100" cy="20" r="3" fill="#C9A84C"/>
+            <line x1="120" y1="20" x2="200" y2="20" stroke="#C9A84C" stroke-width="0.8" opacity="0.6"/>
+          </svg>
+        </div>
+        <blockquote class="quran-text">
+          "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah)."
+        </blockquote>
+        <p class="quran-source">— QS. Ar-Rum : 21</p>
+      </div>
+      <div class="quran-deco bottom"></div>
+    </section>
+
+    <!-- ===================== COUPLE ===================== -->
+    <section id="couple" class="section-couple">
+      <div class="container">
+        <p class="section-eyebrow reveal">Mempelai</p>
+        <h2 class="section-title reveal">Dua Hati, Satu Jiwa</h2>
+
+        <div class="couple-grid">
+          <!-- Bride -->
+          <div class="person-card reveal" style="--delay:0.1s">
+            <div class="person-photo-wrap">
+              <img src="assets/photos/bride.jpg" alt="Awen" onerror="this.style.display='none'" />
+              <div class="person-photo-fallback">
+                <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="18" fill="#F2D5D5"/><ellipse cx="40" cy="70" rx="25" ry="18" fill="#F2D5D5"/></svg>
+              </div>
+            </div>
+            <h3 class="person-name">Awen</h3>
+            <p class="person-parents">Putri dari Bapak & Ibu<br><span>.....</span></p>
+          </div>
+
+          <div class="heart-divider reveal" style="--delay:0.2s">
+            <svg viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M30 70 C10 50 0 40 0 25 C0 12 10 5 20 5 C25 5 29 8 30 10 C31 8 35 5 40 5 C50 5 60 12 60 25 C60 40 50 50 30 70Z" fill="#8B3A52" opacity="0.2"/>
+              <path d="M30 65 C12 47 3 38 3 25 C3 14 12 8 20 8 C25 8 28 11 30 13 C32 11 35 8 40 8 C48 8 57 14 57 25 C57 38 48 47 30 65Z" fill="#8B3A52" opacity="0.5"/>
+            </svg>
+          </div>
+
+          <!-- Groom -->
+          <div class="person-card reveal" style="--delay:0.3s">
+            <div class="person-photo-wrap">
+              <img src="assets/photos/groom.jpg" alt="Rudi" onerror="this.style.display='none'" />
+              <div class="person-photo-fallback">
+                <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="30" r="18" fill="#D5E0F2"/><ellipse cx="40" cy="70" rx="25" ry="18" fill="#D5E0F2"/></svg>
+              </div>
+            </div>
+            <h3 class="person-name">Rudi</h3>
+            <p class="person-parents">Putra dari Bapak & Ibu<br><span>.....</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== GALERI FOTO ===================== -->
+    <section id="gallery" class="section-gallery">
+      <div class="container">
+        <p class="section-eyebrow reveal">Kenangan</p>
+        <h2 class="section-title reveal">Galeri Foto</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item reveal" style="--delay:0.05s"><img src="assets/photos/photo1.jpg" alt="Foto 1" onerror="this.parentElement.classList.add('placeholder-tile')" /></div>
+          <div class="gallery-item reveal" style="--delay:0.10s"><img src="assets/photos/photo2.jpg" alt="Foto 2" onerror="this.parentElement.classList.add('placeholder-tile')" /></div>
+          <div class="gallery-item reveal" style="--delay:0.15s"><img src="assets/photos/photo3.jpg" alt="Foto 3" onerror="this.parentElement.classList.add('placeholder-tile')" /></div>
+          <div class="gallery-item reveal" style="--delay:0.20s"><img src="assets/photos/photo4.jpg" alt="Foto 4" onerror="this.parentElement.classList.add('placeholder-tile')" /></div>
+          <div class="gallery-item reveal" style="--delay:0.25s"><img src="assets/photos/photo5.jpg" alt="Foto 5" onerror="this.parentElement.classList.add('placeholder-tile')" /></div>
+          <div class="gallery-item reveal" style="--delay:0.30s"><img src="assets/photos/photo6.jpg" alt="Foto 6" onerror="this.parentElement.classList.add('placeholder-tile')" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== ACARA ===================== -->
+    <section id="event" class="section-event">
+      <div class="event-bg-deco"></div>
+      <div class="container">
+        <p class="section-eyebrow reveal">Jadwal</p>
+        <h2 class="section-title reveal">Detail Acara</h2>
+
+        <div class="event-cards">
+          <!-- Akad -->
+          <div class="event-card reveal" style="--delay:0.1s">
+            <div class="event-icon">
+              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#C9A84C" stroke-width="1"/><path d="M20 10v10l6 3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Akad Nikah</h3>
+            <p class="event-datetime">Sabtu, 04 Juli 2026<br>08.00 WIB – Selesai</p>
+            <div class="event-divider"></div>
+            <p class="event-place">Rumah Mempelai Wanita<br><span>JI. Pendidikan Komp. Griya Angsana
+Blok C No.31 B.Klippah</span></p>
+          </div>
+
+          <!-- Resepsi -->
+          <div class="event-card reveal" style="--delay:0.2s">
+            <div class="event-icon">
+              <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="#C9A84C" stroke-width="1"/><path d="M12 26 C12 20 16 16 20 16 C24 16 28 20 28 26" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="13" r="3" fill="#C9A84C" opacity="0.7"/></svg>
+            </div>
+            <h3>Resepsi Pernikahan</h3>
+            <p class="event-datetime">Sabtu, 04 Juli 2026<br>11.00 WIB – 18.00 WIB</p>
+            <div class="event-divider"></div>
+            <p class="event-place">Rumah Mempelai Wanita<br><span>JI. Pendidikan Komp. Griya Angsana
+Blok C No.31 B.Klippah</span></p>
+          </div>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown-wrap reveal" style="--delay:0.3s">
+          <p class="countdown-label">Menuju Hari Bahagia</p>
+          <div class="countdown" id="countdown">
+            <div class="cd-box"><span id="cd-days">00</span><label>Hari</label></div>
+            <div class="cd-box"><span id="cd-hours">00</span><label>Jam</label></div>
+            <div class="cd-box"><span id="cd-mins">00</span><label>Menit</label></div>
+            <div class="cd-box"><span id="cd-secs">00</span><label>Detik</label></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== LOKASI MAPS ===================== -->
+    <section id="location" class="section-location">
+      <div class="container">
+        <p class="section-eyebrow reveal">Lokasi</p>
+        <h2 class="section-title reveal">Temukan Kami Di Sini</h2>
+        <div class="map-wrap reveal">
+          <!-- Ganti src dengan koordinat lokasi sebenarnya -->
+          <iframe
+            src="https://maps.app.goo.gl/rmrB3iujjbnQ4ATE9"
+            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Lokasi Pernikahan">
+          </iframe>
+        </div>
+        <a class="btn-maps reveal" href="https://maps.app.goo.gl/rmrB3iujjbnQ4ATE9" target="_blank" rel="noopener">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Buka di Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================== TRANSFER / KADO ===================== -->
+    <section id="gift" class="section-gift">
+      <div class="container">
+        <p class="section-eyebrow reveal">Hadiah</p>
+        <h2 class="section-title reveal">Kirim Kado Digital</h2>
+        <p class="gift-desc reveal">Kehadiran dan doa Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkan melalui transfer di bawah ini:</p>
+
+        <div class="bank-cards">
+          <!-- BCA -->
+          <div class="bank-card reveal" style="--delay:0.1s">
+            <div class="bank-logo">Sumut</div>
+            <div class="bank-info">
+              <p class="bank-name">Bank SUMUT</p>
+              <p class="bank-account-name">Nurliana Nasution</p>
+              <div class="bank-number-row">
+                <span class="bank-number" id="rek-bca">10902040073533</span>
+                <button class="copy-btn" onclick="copyText('rek-bca', this)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  Salin
+                </button>
+              </div>
+            </div>
+          </div>
+
+        
+          
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== UCAPAN / GUESTBOOK ===================== -->
+    <section id="wishes" class="section-wishes">
+      <div class="container">
+        <p class="section-eyebrow reveal">Ucapan</p>
+        <h2 class="section-title reveal">Kirim Ucapan & Doa</h2>
+
+        <div class="wish-form reveal">
+          <input type="text" id="wish-name" placeholder="Nama Anda" maxlength="60" />
+          <textarea id="wish-text" placeholder="Tulis ucapan dan doa terbaik Anda..." rows="4" maxlength="300"></textarea>
+          <button class="btn-submit" onclick="addWish()">Kirim Ucapan ❤</button>
+        </div>
+
+        <div class="wish-list" id="wish-list"></div>
+      </div>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="footer">
+      <div class="footer-floral"></div>
+      <div class="footer-content reveal">
+        <p class="footer-names">Awen & Rudi</p>
+        <p class="footer-date">04 . 07 . 2026</p>
+        <div class="footer-ornament">
+          <svg viewBox="0 0 160 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="15" x2="65" y2="15" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+            <path d="M80 5 L84 13 L93 13 L86 18 L89 26 L80 21 L71 26 L74 18 L67 13 L76 13Z" fill="#C9A84C" opacity="0.6"/>
+            <line x1="95" y1="15" x2="160" y2="15" stroke="#C9A84C" stroke-width="0.8" opacity="0.5"/>
+          </svg>
+        </div>
+        <p class="footer-note">Terima kasih telah menjadi bagian dari kebahagiaan kami</p>
+        <p class="footer-credit">Made with ❤ for a Beautiful Day</p>
+      </div>
+    </footer>
+
+  </main>
+
+  <!-- LIGHTBOX -->
+  <div id="lightbox" onclick="closeLightbox()">
+    <span class="lb-close">&times;</span>
+    <img id="lb-img" src="" alt="Gallery" />
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
