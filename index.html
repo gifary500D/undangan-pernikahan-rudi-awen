@@ -247,64 +247,41 @@
       </div>
     </section>
 
-  <section id="rsvp" class="section-rsvp">
+<section id="rsvp" class="section-rsvp">
   <div class="rsvp-bg-pattern"></div>
+
   <div class="container">
+    <p class="section-eyebrow reveal">UCAPAN</p>
 
 ```
-<p class="section-eyebrow reveal">RSVP</p>
-<h2 class="section-title reveal">Konfirmasi Kehadiran</h2>
+<h2 class="section-title reveal">
+  Kirim Ucapan & Doa
+</h2>
 
 <p class="rsvp-desc reveal">
-  Mohon konfirmasi kehadiran Anda melalui WhatsApp agar kami dapat
-  mempersiapkan segala sesuatunya dengan baik.
+  Berikan doa dan ucapan terbaik Anda untuk kedua mempelai.
 </p>
 
 <div class="rsvp-form-wrap reveal">
 
   <div class="rsvp-input-group">
-    <label>Nama Lengkap</label>
-    <input type="text" id="rsvp-name"
-           placeholder="Masukkan nama Anda">
+    <label>Nama Anda</label>
+    <input
+      type="text"
+      id="rsvp-name"
+      placeholder="Masukkan nama Anda">
   </div>
 
   <div class="rsvp-input-group">
-    <label>Jumlah Tamu</label>
-    <div class="rsvp-counter">
-      <button class="counter-btn" onclick="changeGuest(-1)">−</button>
-      <span id="guest-count">1</span>
-      <button class="counter-btn" onclick="changeGuest(1)">+</button>
-    </div>
-  </div>
-
-  <div class="rsvp-input-group">
-    <label>Konfirmasi Kehadiran</label>
-    <div class="rsvp-attendance">
-      <label class="radio-card">
-        <input type="radio" name="attendance"
-               value="Hadir" checked>
-        <span class="radio-icon">🎉</span>
-        <span>Hadir</span>
-      </label>
-
-      <label class="radio-card">
-        <input type="radio" name="attendance"
-               value="Tidak Hadir">
-        <span class="radio-icon">😔</span>
-        <span>Tidak Hadir</span>
-      </label>
-    </div>
-  </div>
-
-  <div class="rsvp-input-group">
-    <label>Pesan / Ucapan</label>
-    <textarea id="rsvp-message"
-              rows="4"
-              placeholder="Tulis doa & ucapan terbaik untuk kami..."></textarea>
+    <label>Ucapan & Doa</label>
+    <textarea
+      id="rsvp-message"
+      rows="5"
+      placeholder="Tulis doa dan ucapan terbaik untuk kedua mempelai..."></textarea>
   </div>
 
   <button class="btn-rsvp" onclick="sendWhatsApp()">
-    Kirim via WhatsApp
+    💌 Kirim Ucapan via WhatsApp
   </button>
 
 </div>
@@ -312,6 +289,7 @@
 
   </div>
 </section>
+
 
     <!-- ===================== FOOTER ===================== -->
     <footer class="footer">

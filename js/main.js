@@ -165,126 +165,41 @@ function showCopied(btn) {
 }
 
 /* ===================================================
-   6. RSVP / KONFIRMASI KEHADIRAN
-   =================================================== */
-const RSVP_KEY = 'rsvp_awen_rudi_2026';
-let guestCount    = 1;
-let attendanceVal = 'hadir';
+6. UCAPAN VIA WHATSAPP
+=================================================== */
 
-function changeGuest(delta) {
-  guestCount = Math.max(1, Math.min(10, guestCount + delta));
-  document.getElementById('guest-count').textContent = guestCount;
+function sendWhatsApp() {
+
+const nama = document.getElementById('rsvp-name').value.trim();
+const pesan = document.getElementById('rsvp-message').value.trim();
+
+if (!nama) {
+alert('Silakan isi nama terlebih dahulu');
+return;
 }
 
-function setAttendance(val) {
-  attendanceVal = val;
-  document.getElementById('radio-hadir').classList.toggle('selected', val === 'hadir');
-  document.getElementById('radio-tidak').classList.toggle('selected', val === 'tidak');
+if (!pesan) {
+alert('Silakan tulis ucapan atau doa');
+return;
 }
 
-// init radio state
-document.addEventListener('DOMContentLoaded', () => {
-  setAttendance('hadir');
-  renderRSVP();
-});
+const text =
+`Assalamu'alaikum
 
-function loadRSVP() {
-  try { return JSON.parse(localStorage.getItem(RSVP_KEY) || '[]'); } catch { return []; }
+Saya *${nama}* ingin menyampaikan ucapan:
+
+${pesan}
+
+Semoga menjadi keluarga yang sakinah, mawaddah, warahmah. 🤍`;
+
+const nomorWA = "6281260609351"; 
+
+window.open(
+`https://wa.me/${nomorWA}?text=${encodeURIComponent(text)}`,
+'_blank'
+);
 }
 
-function saveRSVP(data) {
-  try { localStorage.setItem(RSVP_KEY, JSON.stringify(data)); } catch {}
-}
-
-function submitRSVP() {
-  const nameEl = document.getElementById('rsvp-name');
-  const msgEl  = document.getElementById('rsvp-message');
-
-  const name = nameEl.value.trim();
-  const msg  = msgEl.value.trim();
-
-  if (!name) {
-    nameEl.style.borderColor = '#E05A7A';
-    nameEl.focus();
-    setTimeout(() => { nameEl.style.borderColor = 'rgba(201,168,76,0.25)'; }, 1500);
-    return;
-  }
-
-  const list = loadRSVP();
-  list.push({
-    name,
-    attendance: attendanceVal,
-    guests: guestCount,
-    message: msg,
-    time: new Date().toLocaleDateString('id-ID', {
-      day: 'numeric', month: 'long', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    })
-  });
-
-  saveRSVP(list);
-
-  // Reset form
-  nameEl.value = '';
-  msgEl.value  = '';
-  guestCount = 1;
-  document.getElementById('guest-count').textContent = '1';
-  setAttendance('hadir');
-
-  renderRSVP();
-
-  // Scroll to summary
-  document.getElementById('rsvp-summary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-function renderRSVP() {
-  const list    = loadRSVP();
-  const summary = document.getElementById('rsvp-summary');
-  const listEl  = document.getElementById('rsvp-list');
-
-  if (!summary || !listEl) return;
-
-  if (list.length === 0) {
-    summary.style.display = 'none';
-    return;
-  }
-
-  summary.style.display = 'block';
-
-  const totalHadir  = list.filter(r => r.attendance === 'hadir').length;
-  const totalTidak  = list.filter(r => r.attendance === 'tidak').length;
-  const totalGuests = list.filter(r => r.attendance === 'hadir').reduce((s, r) => s + (r.guests || 1), 0);
-
-  document.getElementById('stat-hadir').textContent = totalHadir;
-  document.getElementById('stat-tamu').textContent  = totalGuests;
-  document.getElementById('stat-tidak').textContent = totalTidak;
-
-  listEl.innerHTML = list.slice().reverse().map(r => {
-    const badge = r.attendance === 'hadir' ? '🎉' : '😔';
-    const meta  = r.attendance === 'hadir'
-      ? `Hadir · ${r.guests} tamu · ${r.time}`
-      : `Tidak Hadir · ${r.time}`;
-    return `
-      <div class="rsvp-item">
-        <span class="rsvp-item-badge">${badge}</span>
-        <div class="rsvp-item-info">
-          <p class="rsvp-item-name">${escapeHtml(r.name)}</p>
-          <p class="rsvp-item-meta">${meta}</p>
-          ${r.message ? `<p class="rsvp-item-msg">"${escapeHtml(r.message)}"</p>` : ''}
-        </div>
-      </div>
-    `;
-  }).join('');
-}
-
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
 
 /* ===================================================
    7. GALLERY LIGHTBOX
