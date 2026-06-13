@@ -247,74 +247,71 @@
       </div>
     </section>
 
-    <!-- ===================== KONFIRMASI KEHADIRAN ===================== -->
-    <section id="rsvp" class="section-rsvp">
-      <div class="rsvp-bg-pattern"></div>
-      <div class="container">
-        <p class="section-eyebrow reveal">RSVP</p>
-        <h2 class="section-title reveal">Konfirmasi Kehadiran</h2>
-        <p class="rsvp-desc reveal">Mohon konfirmasi kehadiran Anda paling lambat <strong>27 Juni 2026</strong> agar kami dapat mempersiapkan segala sesuatunya dengan baik.</p>
+  <section id="rsvp" class="section-rsvp">
+  <div class="rsvp-bg-pattern"></div>
+  <div class="container">
 
-        <div class="rsvp-form-wrap reveal">
-          <div class="rsvp-input-group">
-            <label>Nama Lengkap</label>
-            <input type="text" id="rsvp-name" placeholder="Masukkan nama Anda" maxlength="80" />
-          </div>
-          <div class="rsvp-input-group">
-            <label>Jumlah Tamu</label>
-            <div class="rsvp-counter">
-              <button class="counter-btn" onclick="changeGuest(-1)">−</button>
-              <span id="guest-count">1</span>
-              <button class="counter-btn" onclick="changeGuest(1)">+</button>
-            </div>
-          </div>
-          <div class="rsvp-input-group">
-            <label>Konfirmasi Kehadiran</label>
-            <div class="rsvp-attendance">
-              <label class="radio-card" id="radio-hadir">
-                <input type="radio" name="attendance" value="hadir" checked onchange="setAttendance('hadir')" />
-                <span class="radio-icon">🎉</span>
-                <span>Hadir</span>
-              </label>
-              <label class="radio-card" id="radio-tidak">
-                <input type="radio" name="attendance" value="tidak" onchange="setAttendance('tidak')" />
-                <span class="radio-icon">😔</span>
-                <span>Tidak Hadir</span>
-              </label>
-            </div>
-          </div>
-          <div class="rsvp-input-group">
-            <label>Pesan / Ucapan <span style="font-weight:300;opacity:.6">(opsional)</span></label>
-            <textarea id="rsvp-message" placeholder="Tulis doa & ucapan terbaik untuk kami..." rows="3" maxlength="300"></textarea>
-          </div>
-          <button class="btn-rsvp" onclick="submitRSVP()">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
-            Kirim Konfirmasi
-          </button>
-        </div>
+```
+<p class="section-eyebrow reveal">RSVP</p>
+<h2 class="section-title reveal">Konfirmasi Kehadiran</h2>
 
-        <!-- Daftar RSVP -->
-        <div class="rsvp-summary reveal" id="rsvp-summary" style="display:none">
-          <div class="rsvp-stats">
-            <div class="rsvp-stat">
-              <span id="stat-hadir">0</span>
-              <label>Hadir</label>
-            </div>
-            <div class="rsvp-stat-divider"></div>
-            <div class="rsvp-stat">
-              <span id="stat-tamu">0</span>
-              <label>Total Tamu</label>
-            </div>
-            <div class="rsvp-stat-divider"></div>
-            <div class="rsvp-stat">
-              <span id="stat-tidak">0</span>
-              <label>Tidak Hadir</label>
-            </div>
-          </div>
-          <div class="rsvp-list" id="rsvp-list"></div>
-        </div>
-      </div>
-    </section>
+<p class="rsvp-desc reveal">
+  Mohon konfirmasi kehadiran Anda melalui WhatsApp agar kami dapat
+  mempersiapkan segala sesuatunya dengan baik.
+</p>
+
+<div class="rsvp-form-wrap reveal">
+
+  <div class="rsvp-input-group">
+    <label>Nama Lengkap</label>
+    <input type="text" id="rsvp-name"
+           placeholder="Masukkan nama Anda">
+  </div>
+
+  <div class="rsvp-input-group">
+    <label>Jumlah Tamu</label>
+    <div class="rsvp-counter">
+      <button class="counter-btn" onclick="changeGuest(-1)">−</button>
+      <span id="guest-count">1</span>
+      <button class="counter-btn" onclick="changeGuest(1)">+</button>
+    </div>
+  </div>
+
+  <div class="rsvp-input-group">
+    <label>Konfirmasi Kehadiran</label>
+    <div class="rsvp-attendance">
+      <label class="radio-card">
+        <input type="radio" name="attendance"
+               value="Hadir" checked>
+        <span class="radio-icon">🎉</span>
+        <span>Hadir</span>
+      </label>
+
+      <label class="radio-card">
+        <input type="radio" name="attendance"
+               value="Tidak Hadir">
+        <span class="radio-icon">😔</span>
+        <span>Tidak Hadir</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="rsvp-input-group">
+    <label>Pesan / Ucapan</label>
+    <textarea id="rsvp-message"
+              rows="4"
+              placeholder="Tulis doa & ucapan terbaik untuk kami..."></textarea>
+  </div>
+
+  <button class="btn-rsvp" onclick="sendWhatsApp()">
+    Kirim via WhatsApp
+  </button>
+
+</div>
+```
+
+  </div>
+</section>
 
     <!-- ===================== FOOTER ===================== -->
     <footer class="footer">
