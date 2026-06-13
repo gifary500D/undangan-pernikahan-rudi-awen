@@ -14,43 +14,33 @@ function openEnvelope() {
   btn.disabled = true;
   btn.style.opacity = '0.5';
 
-  // Step 1: flap opens (900ms), then fade wrapper out (800ms), then show content
   setTimeout(() => {
     const wrapper = document.getElementById('envelope-wrapper');
     wrapper.classList.add('closing');
 
-    // Step 2: after fade-out, hide wrapper and unlock scroll RELIABLY
     setTimeout(() => {
       wrapper.style.display = 'none';
-      // Always unlock scroll here — no relying on transitionend
+      // Always unlock scroll reliably here
       document.body.style.overflow = '';
       document.documentElement.style.overflow = '';
       showMainContent();
-    }, 850); // slightly longer than CSS transition (0.8s)
+    }, 850);
   }, 900);
 }
 
 function showMainContent() {
   const main = document.getElementById('main-content');
-
-  // Remove hidden class — CSS sets display:none on .hidden
   main.classList.remove('hidden');
-
-  // Force a reflow so the browser registers the display change before animating
-  main.offsetHeight;
-
+  main.offsetHeight; // force reflow
   main.classList.add('visible');
 
   // Auto-play music
   setTimeout(() => {
     const audio = document.getElementById('bg-music');
-    audio.play().catch(() => {
-      // Autoplay blocked — user can click play button
-    });
+    audio.play().catch(() => {});
     updateMusicUI(true);
   }, 600);
 
-  // Init scroll reveal after content is painted
   setTimeout(initReveal, 150);
 }
 
@@ -59,7 +49,6 @@ function showMainContent() {
    =================================================== */
 function initReveal() {
   const elements = document.querySelectorAll('.reveal');
-
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -67,11 +56,7 @@ function initReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  });
-
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   elements.forEach(el => observer.observe(el));
 }
 
@@ -82,11 +67,7 @@ let isPlaying = false;
 
 function toggleMusic() {
   const audio = document.getElementById('bg-music');
-  if (isPlaying) {
-    audio.pause();
-  } else {
-    audio.play().catch(() => {});
-  }
+  if (isPlaying) { audio.pause(); } else { audio.play().catch(() => {}); }
   isPlaying = !isPlaying;
   updateMusicUI(isPlaying);
 }
@@ -96,7 +77,6 @@ function updateMusicUI(playing) {
   const iconPlay  = document.getElementById('icon-play');
   const iconPause = document.getElementById('icon-pause');
   const label     = document.getElementById('music-label');
-
   if (playing) {
     iconPlay.style.display  = 'none';
     iconPause.style.display = 'block';
@@ -108,7 +88,6 @@ function updateMusicUI(playing) {
   }
 }
 
-// Sync UI when audio ends or pauses externally
 document.addEventListener('DOMContentLoaded', () => {
   const audio = document.getElementById('bg-music');
   if (audio) {
@@ -118,24 +97,24 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ===================================================
-   4. COUNTDOWN TIMER
+   4. COUNTDOWN TIMER — 4 Juli 2026 08:00 WIB (UTC+7)
    =================================================== */
 function startCountdown() {
-  // Tanggal pernikahan — sesuaikan di sini
-  const weddingDate = new Date('2025-06-14T08:00:00');
+  // UTC+7 = UTC+420 menit. 4 Juli 2026 08:00 WIB = 4 Juli 2026 01:00 UTC
+  const weddingDate = new Date('2026-07-04T01:00:00Z');
 
   function update() {
     const now  = new Date();
     const diff = weddingDate - now;
+
+    const labelEl = document.querySelector('.countdown-label');
 
     if (diff <= 0) {
       document.getElementById('cd-days').textContent  = '00';
       document.getElementById('cd-hours').textContent = '00';
       document.getElementById('cd-mins').textContent  = '00';
       document.getElementById('cd-secs').textContent  = '00';
-      // Show congratulation message
-      const wrap = document.querySelector('.countdown-label');
-      if (wrap) wrap.textContent = '🎊 Hari Bahagia Telah Tiba!';
+      if (labelEl) labelEl.textContent = '🎊 Hari Bahagia Telah Tiba!';
       return;
     }
 
@@ -161,11 +140,9 @@ startCountdown();
    =================================================== */
 function copyText(elementId, btn) {
   const text = document.getElementById(elementId).textContent.trim();
-
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(text).then(() => showCopied(btn));
   } else {
-    // Fallback
     const ta = document.createElement('textarea');
     ta.value = text;
     ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px';
@@ -188,84 +165,120 @@ function showCopied(btn) {
 }
 
 /* ===================================================
-   6. WISHES / GUESTBOOK
+   6. RSVP / KONFIRMASI KEHADIRAN
    =================================================== */
-const STORAGE_KEY = 'wedding_wishes_awen_rudi';
+const RSVP_KEY = 'rsvp_awen_rudi_2026';
+let guestCount    = 1;
+let attendanceVal = 'hadir';
 
-function loadWishes() {
-  try {
-    return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-  } catch {
-    return [];
-  }
+function changeGuest(delta) {
+  guestCount = Math.max(1, Math.min(10, guestCount + delta));
+  document.getElementById('guest-count').textContent = guestCount;
 }
 
-function saveWishes(wishes) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
-  } catch {}
+function setAttendance(val) {
+  attendanceVal = val;
+  document.getElementById('radio-hadir').classList.toggle('selected', val === 'hadir');
+  document.getElementById('radio-tidak').classList.toggle('selected', val === 'tidak');
 }
 
-function renderWishes() {
-  const wishes  = loadWishes();
-  const list    = document.getElementById('wish-list');
-  if (!list) return;
+// init radio state
+document.addEventListener('DOMContentLoaded', () => {
+  setAttendance('hadir');
+  renderRSVP();
+});
 
-  if (wishes.length === 0) {
-    list.innerHTML = '<p style="text-align:center;color:rgba(250,247,242,0.3);font-size:0.85rem;padding:20px 0;">Jadilah yang pertama mengucapkan selamat 💕</p>';
+function loadRSVP() {
+  try { return JSON.parse(localStorage.getItem(RSVP_KEY) || '[]'); } catch { return []; }
+}
+
+function saveRSVP(data) {
+  try { localStorage.setItem(RSVP_KEY, JSON.stringify(data)); } catch {}
+}
+
+function submitRSVP() {
+  const nameEl = document.getElementById('rsvp-name');
+  const msgEl  = document.getElementById('rsvp-message');
+
+  const name = nameEl.value.trim();
+  const msg  = msgEl.value.trim();
+
+  if (!name) {
+    nameEl.style.borderColor = '#E05A7A';
+    nameEl.focus();
+    setTimeout(() => { nameEl.style.borderColor = 'rgba(201,168,76,0.25)'; }, 1500);
     return;
   }
 
-  list.innerHTML = wishes.slice().reverse().map(w => `
-    <div class="wish-item">
-      <p class="wish-item-name">❤ ${escapeHtml(w.name)}</p>
-      <p class="wish-item-text">${escapeHtml(w.text)}</p>
-      <p class="wish-item-time">${w.time}</p>
-    </div>
-  `).join('');
-}
-
-function addWish() {
-  const nameEl = document.getElementById('wish-name');
-  const textEl = document.getElementById('wish-text');
-
-  const name = nameEl.value.trim();
-  const text = textEl.value.trim();
-
-  if (!name) { shake(nameEl); return; }
-  if (!text)  { shake(textEl); return; }
-
-  const wishes = loadWishes();
-  wishes.push({
+  const list = loadRSVP();
+  list.push({
     name,
-    text,
+    attendance: attendanceVal,
+    guests: guestCount,
+    message: msg,
     time: new Date().toLocaleDateString('id-ID', {
       day: 'numeric', month: 'long', year: 'numeric',
       hour: '2-digit', minute: '2-digit'
     })
   });
 
-  saveWishes(wishes);
-  renderWishes();
+  saveRSVP(list);
 
+  // Reset form
   nameEl.value = '';
-  textEl.value = '';
+  msgEl.value  = '';
+  guestCount = 1;
+  document.getElementById('guest-count').textContent = '1';
+  setAttendance('hadir');
 
-  // Scroll to wish list
-  document.getElementById('wish-list').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  renderRSVP();
+
+  // Scroll to summary
+  document.getElementById('rsvp-summary').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-function shake(el) {
-  el.style.animation = 'none';
-  el.offsetHeight; // reflow
-  el.style.border = '1px solid #E05A7A';
-  setTimeout(() => {
-    el.style.border = '1px solid rgba(201,168,76,0.25)';
-  }, 1200);
+function renderRSVP() {
+  const list    = loadRSVP();
+  const summary = document.getElementById('rsvp-summary');
+  const listEl  = document.getElementById('rsvp-list');
+
+  if (!summary || !listEl) return;
+
+  if (list.length === 0) {
+    summary.style.display = 'none';
+    return;
+  }
+
+  summary.style.display = 'block';
+
+  const totalHadir  = list.filter(r => r.attendance === 'hadir').length;
+  const totalTidak  = list.filter(r => r.attendance === 'tidak').length;
+  const totalGuests = list.filter(r => r.attendance === 'hadir').reduce((s, r) => s + (r.guests || 1), 0);
+
+  document.getElementById('stat-hadir').textContent = totalHadir;
+  document.getElementById('stat-tamu').textContent  = totalGuests;
+  document.getElementById('stat-tidak').textContent = totalTidak;
+
+  listEl.innerHTML = list.slice().reverse().map(r => {
+    const badge = r.attendance === 'hadir' ? '🎉' : '😔';
+    const meta  = r.attendance === 'hadir'
+      ? `Hadir · ${r.guests} tamu · ${r.time}`
+      : `Tidak Hadir · ${r.time}`;
+    return `
+      <div class="rsvp-item">
+        <span class="rsvp-item-badge">${badge}</span>
+        <div class="rsvp-item-info">
+          <p class="rsvp-item-name">${escapeHtml(r.name)}</p>
+          <p class="rsvp-item-meta">${meta}</p>
+          ${r.message ? `<p class="rsvp-item-msg">"${escapeHtml(r.message)}"</p>` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
 }
 
 function escapeHtml(str) {
-  return str
+  return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
@@ -273,18 +286,14 @@ function escapeHtml(str) {
     .replace(/'/g, '&#039;');
 }
 
-// Initial render
-renderWishes();
-
 /* ===================================================
    7. GALLERY LIGHTBOX
    =================================================== */
 document.addEventListener('DOMContentLoaded', () => {
-  const items    = document.querySelectorAll('.gallery-item img');
   const lightbox = document.getElementById('lightbox');
   const lbImg    = document.getElementById('lb-img');
 
-  items.forEach(img => {
+  document.querySelectorAll('.gallery-item img').forEach(img => {
     img.addEventListener('click', () => {
       lbImg.src = img.src;
       lightbox.classList.add('open');
@@ -301,17 +310,15 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* ===================================================
-   8. LOCK SCROLL on envelope, unlock reliably on open
+   8. SCROLL LOCK — lock on load, unlock after open
    =================================================== */
 document.addEventListener('DOMContentLoaded', () => {
   const wrapper = document.getElementById('envelope-wrapper');
   if (wrapper) {
-    // Lock scroll while envelope is shown
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
   }
-
-  // Safety net: if somehow still locked after 10s, force unlock
+  // Safety net: force-unlock after 10s if somehow stuck
   setTimeout(() => {
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';

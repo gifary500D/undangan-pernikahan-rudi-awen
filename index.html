@@ -39,7 +39,7 @@
     <!-- MUSIC PLAYER -->
     <div id="music-player">
       <audio id="bg-music" loop>
-        <source src="assets/music/lagu_undangan.mp3" type="audio/mp3" />
+        <source src="assets/music/lagu_undangan.mp3" type="audio/mpeg" />
       </audio>
       <button id="music-btn" onclick="toggleMusic()" title="Play/Pause Music">
         <svg id="icon-play" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
@@ -52,7 +52,7 @@
     <section id="hero">
       <div class="hero-overlay"></div>
       <div class="hero-photo-wrap">
-        <img src="assets/photos/couple_landscape.jpg" alt="Awen & Rudi" id="hero-img" onerror="this.src='assets/photos/couple_landscape.jpg'" />
+        <img src="assets/photos/couple_landscape.jpg" alt="Awen & Rudi" id="hero-img" />
       </div>
       <div class="hero-content reveal">
         <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
@@ -61,7 +61,7 @@
         <div class="hero-divider">
           <span></span><svg width="20" height="20" viewBox="0 0 24 24" fill="#C9A84C"><path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z"/></svg><span></span>
         </div>
-        <p class="hero-date">Sabtu, 14 Juni 2025</p>
+        <p class="hero-date">Sabtu, 04 Juli 2026</p>
       </div>
     </section>
 
@@ -158,8 +158,7 @@
             <h3>Akad Nikah</h3>
             <p class="event-datetime">Sabtu, 04 Juli 2026<br>08.00 WIB – Selesai</p>
             <div class="event-divider"></div>
-            <p class="event-place">Rumah Mempelai Wanita<br><span>JI. Pendidikan Komp. Griya Angsana
-Blok C No.31 B.Klippah</span></p>
+            <p class="event-place">Rumah Mempelai Wanita<br><span>Jl. Pendidikan Komp. Griya Angsana Blok C No.31 B.Klippah</span></p>
           </div>
 
           <!-- Resepsi -->
@@ -170,8 +169,7 @@ Blok C No.31 B.Klippah</span></p>
             <h3>Resepsi Pernikahan</h3>
             <p class="event-datetime">Sabtu, 04 Juli 2026<br>11.00 WIB – 18.00 WIB</p>
             <div class="event-divider"></div>
-            <p class="event-place">Rumah Mempelai Wanita<br><span>JI. Pendidikan Komp. Griya Angsana
-Blok C No.31 B.Klippah</span></p>
+            <p class="event-place">Rumah Mempelai Wanita<br><span>Jl. Pendidikan Komp. Griya Angsana Blok C No.31 B.Klippah</span></p>
           </div>
         </div>
 
@@ -193,12 +191,27 @@ Blok C No.31 B.Klippah</span></p>
       <div class="container">
         <p class="section-eyebrow reveal">Lokasi</p>
         <h2 class="section-title reveal">Temukan Kami Di Sini</h2>
+        <p class="location-address reveal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Jl. Pendidikan Komp. Griya Angsana Blok C No.31, Binjai Klippah
+        </p>
         <div class="map-wrap reveal">
-          <!-- Ganti src dengan koordinat lokasi sebenarnya -->
+          <!--
+            ⚠️  CARA GANTI EMBED MAP YANG BENAR:
+            1. Buka maps.google.com → cari alamat
+            2. Klik Share → Embed a map → copy SELURUH tag <iframe>
+            3. Tempel di sini (ganti iframe di bawah)
+            Sementara ini pakai koordinat manual yang mendekati alamat.
+          -->
           <iframe
-            src="https://maps.app.goo.gl/rmrB3iujjbnQ4ATE9"
-            width="100%" height="320" style="border:0;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade" title="Lokasi Pernikahan">
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.09!2d98.4850!3d3.6200!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMzcnMTIuMCJOIDk4wrAyOScwNi4wIkU!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+            width="100%"
+            height="320"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Lokasi Pernikahan Awen & Rudi">
           </iframe>
         </div>
         <a class="btn-maps reveal" href="https://maps.app.goo.gl/rmrB3iujjbnQ4ATE9" target="_blank" rel="noopener">
@@ -216,7 +229,6 @@ Blok C No.31 B.Klippah</span></p>
         <p class="gift-desc reveal">Kehadiran dan doa Anda adalah hadiah terbesar bagi kami. Namun jika ingin memberikan hadiah, Anda dapat mengirimkan melalui transfer di bawah ini:</p>
 
         <div class="bank-cards">
-          <!-- BCA -->
           <div class="bank-card reveal" style="--delay:0.1s">
             <div class="bank-logo">Sumut</div>
             <div class="bank-info">
@@ -231,26 +243,76 @@ Blok C No.31 B.Klippah</span></p>
               </div>
             </div>
           </div>
-
-        
-          
         </div>
       </div>
     </section>
 
-    <!-- ===================== UCAPAN / GUESTBOOK ===================== -->
-    <section id="wishes" class="section-wishes">
+    <!-- ===================== KONFIRMASI KEHADIRAN ===================== -->
+    <section id="rsvp" class="section-rsvp">
+      <div class="rsvp-bg-pattern"></div>
       <div class="container">
-        <p class="section-eyebrow reveal">Ucapan</p>
-        <h2 class="section-title reveal">Kirim Ucapan & Doa</h2>
+        <p class="section-eyebrow reveal">RSVP</p>
+        <h2 class="section-title reveal">Konfirmasi Kehadiran</h2>
+        <p class="rsvp-desc reveal">Mohon konfirmasi kehadiran Anda paling lambat <strong>27 Juni 2026</strong> agar kami dapat mempersiapkan segala sesuatunya dengan baik.</p>
 
-        <div class="wish-form reveal">
-          <input type="text" id="wish-name" placeholder="Nama Anda" maxlength="60" />
-          <textarea id="wish-text" placeholder="Tulis ucapan dan doa terbaik Anda..." rows="4" maxlength="300"></textarea>
-          <button class="btn-submit" onclick="addWish()">Kirim Ucapan ❤</button>
+        <div class="rsvp-form-wrap reveal">
+          <div class="rsvp-input-group">
+            <label>Nama Lengkap</label>
+            <input type="text" id="rsvp-name" placeholder="Masukkan nama Anda" maxlength="80" />
+          </div>
+          <div class="rsvp-input-group">
+            <label>Jumlah Tamu</label>
+            <div class="rsvp-counter">
+              <button class="counter-btn" onclick="changeGuest(-1)">−</button>
+              <span id="guest-count">1</span>
+              <button class="counter-btn" onclick="changeGuest(1)">+</button>
+            </div>
+          </div>
+          <div class="rsvp-input-group">
+            <label>Konfirmasi Kehadiran</label>
+            <div class="rsvp-attendance">
+              <label class="radio-card" id="radio-hadir">
+                <input type="radio" name="attendance" value="hadir" checked onchange="setAttendance('hadir')" />
+                <span class="radio-icon">🎉</span>
+                <span>Hadir</span>
+              </label>
+              <label class="radio-card" id="radio-tidak">
+                <input type="radio" name="attendance" value="tidak" onchange="setAttendance('tidak')" />
+                <span class="radio-icon">😔</span>
+                <span>Tidak Hadir</span>
+              </label>
+            </div>
+          </div>
+          <div class="rsvp-input-group">
+            <label>Pesan / Ucapan <span style="font-weight:300;opacity:.6">(opsional)</span></label>
+            <textarea id="rsvp-message" placeholder="Tulis doa & ucapan terbaik untuk kami..." rows="3" maxlength="300"></textarea>
+          </div>
+          <button class="btn-rsvp" onclick="submitRSVP()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            Kirim Konfirmasi
+          </button>
         </div>
 
-        <div class="wish-list" id="wish-list"></div>
+        <!-- Daftar RSVP -->
+        <div class="rsvp-summary reveal" id="rsvp-summary" style="display:none">
+          <div class="rsvp-stats">
+            <div class="rsvp-stat">
+              <span id="stat-hadir">0</span>
+              <label>Hadir</label>
+            </div>
+            <div class="rsvp-stat-divider"></div>
+            <div class="rsvp-stat">
+              <span id="stat-tamu">0</span>
+              <label>Total Tamu</label>
+            </div>
+            <div class="rsvp-stat-divider"></div>
+            <div class="rsvp-stat">
+              <span id="stat-tidak">0</span>
+              <label>Tidak Hadir</label>
+            </div>
+          </div>
+          <div class="rsvp-list" id="rsvp-list"></div>
+        </div>
       </div>
     </section>
 
