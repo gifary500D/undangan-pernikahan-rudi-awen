@@ -189,7 +189,7 @@ const text =
 pesan +
 "\n\nSemoga menjadi keluarga yang sakinah, mawaddah, warahmah.";
 
-const nomorWA = "6281260609351";
+const nomorWA = "6281262099102";
 
 const url =
 "https://wa.me/" +
